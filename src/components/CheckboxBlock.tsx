@@ -9,8 +9,8 @@ interface Props {
 
 export const CheckboxBlock = (props: Props) => {
   return (
-    <div class="w-100">
-      <h2>{props.title}</h2>
+    <div class="w-100 mb-5">
+      <h2 class="text-center text-2xl">{props.title}</h2>
       <div class="flex gap-2 flex-wrap">
         <For each={props.values}>
           {([label, checked]) => (

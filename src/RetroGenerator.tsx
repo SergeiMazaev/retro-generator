@@ -35,7 +35,7 @@ export const RetroGenerator = () => {
   };
 
   return (
-    <div class="flex flex-col items-center m-auto w-3/4">
+    <div class="flex flex-col items-center m-auto w-3/4 my-5">
       <CheckboxBlock title="Преподаватели" values={teacherCheck()} onChange={onChangeTeacher} />
       <CheckboxBlock title="Группы студентов" values={groupCheck()} onChange={onChangeGroup} />
       <Generator
