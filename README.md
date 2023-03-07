@@ -1,1 +1,1 @@
-# chat-gpt-solid
+# retro generator
