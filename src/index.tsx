@@ -1,6 +1,6 @@
 import { render } from 'solid-js/web';
 
-import { RetroGeneretor } from './RetroGeneretor';
+import { RetroGenerator } from './RetroGenerator';
 
 const root = document.getElementById('root');
 
@@ -10,4 +10,4 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <RetroGeneretor />, root!);
+render(() => <RetroGenerator />, root!);

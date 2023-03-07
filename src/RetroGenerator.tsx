@@ -4,18 +4,18 @@ import { CheckboxBlock } from './components/CheckboxBlock';
 import { groupsQuery } from './api/groupsQuery';
 import { Generator } from './components/Generator';
 
-export const RetroGeneretor = () => {
-  const [teachers] = createResource(teachersQuery);
-  const [groups] = createResource(groupsQuery);
+export const RetroGenerator = () => {
+  const [teachers] = createResource(teachersQuery, { initialValue: [] });
+  const [groups] = createResource(groupsQuery, { initialValue: [] });
   const [teacherCheck, setTeacherCheck] = createSignal<[string, boolean][]>([]);
   const [groupCheck, setGroupCheck] = createSignal<[string, boolean][]>([]);
 
   createEffect(() => {
-    setTeacherCheck(() => teachers()?.map((teacher) => [teacher, true]) ?? []);
+    setTeacherCheck(() => teachers().map((teacher) => [teacher, true]) ?? []);
   });
 
   createEffect(() => {
-    setGroupCheck(() => groups()?.map(({ name }) => [name, true]) ?? []);
+    setGroupCheck(() => groups().map(({ name }) => [name, true]) ?? []);
   });
 
   const onChangeTeacher = (teacherName: string) => {

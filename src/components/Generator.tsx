@@ -2,6 +2,7 @@ import { createSignal } from 'solid-js';
 import { Group } from '../api/groupsQuery';
 import { shuffle } from '../utils/shuffle';
 import { DisplayRetro } from './DisplayRetro';
+import {normalizeGroups} from "../utils/normalizeGroups";
 
 interface DataDisplay {
   teachers: string[];
@@ -39,20 +40,7 @@ export const Generator = (props: Props) => {
         return { ...group, students: result };
       });
 
-    for (let i = 0; i < teachers.length; i++) {
-      const countI = groups.reduce((acc, group) => acc + group.students[i].length, 0);
-      for (let j = 0; j < teachers.length; j++) {
-        const countJ = groups.reduce((acc, group) => acc + group.students[j].length, 0);
-        if (Math.abs(countI - countJ) > 1) {
-          const index = groups.findIndex(
-            ({ students }) => students[i].length !== students[j].length,
-          );
-          const temp = groups[index].students[j];
-          groups[index].students[j] = groups[index].students[i];
-          groups[index].students[i] = temp;
-        }
-      }
-    }
+    normalizeGroups(teachers.length, groups);
 
     setBlocks(() => ({ teachers, groups }));
   };
