@@ -1,4 +1,4 @@
-import { createSignal, For } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { Group } from '../api/groupsQuery';
 import { shuffle } from '../utils/shuffle';
 import { DisplayRetro } from './DisplayRetro';
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const Generator = (props: Props) => {
-  const [blocks, setBlocks] = createSignal<DataDisplay>([]);
+  const [blocks, setBlocks] = createSignal<DataDisplay>({teachers: [], groups: []});
   const generate = () => {
     const teachers = shuffle(props.teachers);
     const groups = props.groups
