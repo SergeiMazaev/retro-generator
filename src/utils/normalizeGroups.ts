@@ -6,7 +6,7 @@ export type Group = {
 
 export const normalizeGroups = (teacherNumber: number, groups: Group[]) => {
   for (let i = 0; i < teacherNumber; i++) {
-    const firstTeacherStudentCount = countTeacherStudent(groups, i);
+    let firstTeacherStudentCount = countTeacherStudent(groups, i);
     for (let j = 0; j < teacherNumber; j++) {
       const secondTeacherStudentCount = countTeacherStudent(groups, j);
       if (Math.abs(firstTeacherStudentCount - secondTeacherStudentCount) > 1) {
@@ -16,6 +16,7 @@ export const normalizeGroups = (teacherNumber: number, groups: Group[]) => {
         const temp = groups[index].students[j];
         groups[index].students[j] = groups[index].students[i];
         groups[index].students[i] = temp;
+        firstTeacherStudentCount = countTeacherStudent(groups, i);
       }
     }
   }
