@@ -1,3 +1,5 @@
+import {GroupType} from "../types";
+
 export interface Group {
   id: string;
   name: string;
@@ -12,8 +14,8 @@ export interface Group {
 
 const url = 'https://pairs-generator.onrender.com/api/groups/';
 
-export const groupsQuery = async (): Promise<Group[]> => {
+export const groupsQuery = async (type: GroupType = 'online'): Promise<Group[]> => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const groups = (await (await fetch(url)).json()) as Group[];
-  return groups.filter(({ groupType }) => groupType === 'online');
+  return groups.filter(({ groupType }) => groupType === type);
 };

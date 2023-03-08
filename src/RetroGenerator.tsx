@@ -5,8 +5,8 @@ import { groupsQuery } from './api/groupsQuery';
 import { Generator } from './components/Generator';
 
 export const RetroGenerator = () => {
-  const [teachers] = createResource(teachersQuery, { initialValue: [] });
-  const [groups] = createResource(groupsQuery, { initialValue: [] });
+  const [teachers] = createResource('online', teachersQuery,  { initialValue: [] });
+  const [groups] = createResource('online', groupsQuery, { initialValue: [] });
   const [teacherCheck, setTeacherCheck] = createSignal<[string, boolean][]>([]);
   const [groupCheck, setGroupCheck] = createSignal<[string, boolean][]>([]);
 
