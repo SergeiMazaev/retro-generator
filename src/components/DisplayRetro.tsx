@@ -9,7 +9,20 @@ interface Props {
 }
 
 const colors = ['bg-blue-200', 'bg-yellow-200', 'bg-green-200'];
-const width = ['w-0', 'w-100', 'w-1/2', 'w-1/3', 'w-1/4', 'w-1/5', 'w-1/6'];
+const width = [
+  'w-0',
+  'w-100',
+  'w-1/2',
+  'w-1/3',
+  'w-1/4',
+  'w-1/5',
+  'w-1/6',
+  'cw-17',
+  'cw-18',
+  'cw-19',
+  'w-1/12',
+  'w-1/12',
+];
 
 export const DisplayRetro = (props: Props) => {
   return (

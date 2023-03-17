@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cw-17 {
+  width: 14.3%;
+}
+.cw-18 {
+    width: 12.5%;
+}
+.cw-19 {
+    width: 11.1%;
+}
