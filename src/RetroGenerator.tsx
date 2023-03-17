@@ -7,6 +7,7 @@ import { Selector } from './components/Selector';
 import { GroupType } from './types';
 import { useGroupsStore } from './store/useGroupsStore';
 import { useTeachersStore } from './store/useTeacherStore';
+import { TeacherWindow } from './components/TeacherWindow';
 
 export const RetroGenerator = () => {
   const [groupType, setGroupType] = createSignal<GroupType>('online');
@@ -21,11 +22,11 @@ export const RetroGenerator = () => {
   });
 
   createEffect(() => {
-    setTeacherCheck(() => teacherStore.teachers.map((teacher) => [teacher, true]) ?? []);
+    setTeacherCheck(() => teacherStore.teachers.map((teacher) => [teacher, true]));
   });
 
   createEffect(() => {
-    setGroupCheck(() => groupStore.groups.map(({ name }) => [name, true]) ?? []);
+    setGroupCheck(() => groupStore.groups.map(({ name }) => [name, true]));
   });
 
   const onChangeTeacher = (teacherName: string) => {
@@ -56,7 +57,12 @@ export const RetroGenerator = () => {
         currentValue={groupType()}
         onChange={onGroupTypeChange}
       />
-      <CheckboxBlock title="Преподаватели" values={teacherCheck()} onChange={onChangeTeacher} />
+      <CheckboxBlock
+        title="Преподаватели"
+        values={teacherCheck()}
+        onChange={onChangeTeacher}
+        editWindow={TeacherWindow}
+      />
       <CheckboxBlock title="Группы студентов" values={groupCheck()} onChange={onChangeGroup} />
       <Generator
         groups={groupCheck()
