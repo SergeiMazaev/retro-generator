@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js';
 import { Group } from '../api/groupsQuery';
 import { shuffle } from '../utils/shuffle';
 import { DisplayRetro } from './DisplayRetro';
-import {normalizeGroups} from "../utils/normalizeGroups";
+import { normalizeGroups } from '../utils/normalizeGroups';
 
 interface DataDisplay {
   teachers: string[];
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const Generator = (props: Props) => {
-  const [blocks, setBlocks] = createSignal<DataDisplay>({teachers: [], groups: []});
+  const [blocks, setBlocks] = createSignal<DataDisplay>({ teachers: [], groups: [] });
   const generate = () => {
     const teachers = shuffle(props.teachers);
     const groups = props.groups
@@ -48,7 +48,9 @@ export const Generator = (props: Props) => {
   return (
     <>
       <DisplayRetro teachers={blocks().teachers} groups={blocks().groups} />
-      <button onClick={generate} class="bg-gray-300 border-2 px-3 py-1 rounded">Generate</button>
+      <button onClick={generate} class="bg-gray-300 border-2 px-3 py-1 rounded">
+        Generate
+      </button>
     </>
   );
 };

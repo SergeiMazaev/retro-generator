@@ -1,4 +1,4 @@
-import {GroupType} from "../types";
+import { GroupType } from '../types';
 
 interface TeacherResponse {
   groupType: GroupType;
@@ -6,7 +6,8 @@ interface TeacherResponse {
   timegaps: string[];
 }
 
-const url = (groupType: GroupType) => `https://pairs-generator.onrender.com/api/teachersandtime?groupType=${groupType}`;
+const url = (groupType: GroupType) =>
+  `https://pairs-generator.onrender.com/api/teachersandtime?groupType=${groupType}`;
 
 export const teachersQuery = async (groupType: GroupType = 'online'): Promise<string[]> => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

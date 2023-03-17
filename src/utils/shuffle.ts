@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign, no-plusplus, @typescript-eslint/no-use-before-define */
 export function shuffle<T>(array: T[]) {
   const cloneArray = [...array];
 

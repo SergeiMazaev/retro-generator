@@ -1,1 +1,1 @@
-export type GroupType = 'online' | 'msk' | 'spb'
+export type GroupType = 'online' | 'msk' | 'spb';

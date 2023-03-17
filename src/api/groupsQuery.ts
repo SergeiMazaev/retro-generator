@@ -1,4 +1,4 @@
-import {GroupType} from "../types";
+import { GroupType } from '../types';
 
 export interface Group {
   id: string;
