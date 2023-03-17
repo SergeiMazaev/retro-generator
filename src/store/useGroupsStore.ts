@@ -27,7 +27,8 @@ export const useGroupsStore = create<GroupStore>((set) => ({
   },
   remove: (groupName: string, studentName: string) => {
     set((state) => {
-      const groups = state.groups.map((group) => {
+      const copy = JSON.parse(JSON.stringify(state.groups)) as Group[];
+      const groups = copy.map((group) => {
         if (group.name !== groupName) return group;
         return {
           ...group,

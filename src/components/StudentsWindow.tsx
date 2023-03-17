@@ -1,4 +1,4 @@
-import { createSignal, For } from 'solid-js';
+import { createEffect, createSignal, For } from 'solid-js';
 import { Window } from './Window';
 import { useGroupsStore } from '../store/useGroupsStore';
 import { Selector } from './Selector';
@@ -14,12 +14,16 @@ export const StudentsWindow = (props: Props) => {
   const [students, setStudents] = createSignal(groups[0]?.students ?? []);
   const [newStudent, setNewStudent] = createSignal('');
 
+  createEffect(() => {
+    setStudents(groups.find((group) => group.name === groupName())?.students ?? []);
+  });
+
   const onGroupNameChange = (value: string) => {
     setGroupName(value);
     setStudents(groups.find((group) => group.name === value)?.students ?? []);
   };
   return (
-    <Window header="Teachers" onClose={props.onClose} isOpen={props.isOpen}>
+    <Window header="Students" onClose={props.onClose} isOpen={props.isOpen}>
       <Selector
         title=""
         values={groups.map(({ name }) => name)}
