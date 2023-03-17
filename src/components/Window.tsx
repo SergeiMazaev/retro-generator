@@ -11,7 +11,7 @@ export const Window = (props: Props) => {
   const { isOpen, children, onClose, header } = props;
   if (!isOpen) return null;
   return (
-    <div class="fixed top-0 right-0 w-1/3 h-full bg-gray-200 z-50">
+    <div class="fixed top-0 right-0 w-1/3 h-full bg-gray-200 z-50 overflow-auto	">
       <div class="p-4">
         <div class="mb-4">
           <h3 class="text-lg font-bold">{header}</h3>

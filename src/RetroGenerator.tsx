@@ -8,6 +8,7 @@ import { GroupType } from './types';
 import { useGroupsStore } from './store/useGroupsStore';
 import { useTeachersStore } from './store/useTeacherStore';
 import { TeacherWindow } from './components/TeacherWindow';
+import { StudentsWindow } from './components/StudentsWindow';
 
 export const RetroGenerator = () => {
   const [groupType, setGroupType] = createSignal<GroupType>('online');
@@ -63,7 +64,12 @@ export const RetroGenerator = () => {
         onChange={onChangeTeacher}
         editWindow={TeacherWindow}
       />
-      <CheckboxBlock title="Группы студентов" values={groupCheck()} onChange={onChangeGroup} />
+      <CheckboxBlock
+        title="Группы студентов"
+        values={groupCheck()}
+        onChange={onChangeGroup}
+        editWindow={StudentsWindow}
+      />
       <Generator
         groups={groupCheck()
           .filter(([, checked]) => checked)
