@@ -1,24 +1,31 @@
-import { createEffect, createResource, createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 import { teachersQuery } from './api/teachersQuery';
 import { CheckboxBlock } from './components/CheckboxBlock';
 import { groupsQuery } from './api/groupsQuery';
 import { Generator } from './components/Generator';
-import {Selector} from "./components/Selector";
-import {GroupType} from "./types";
+import { Selector } from './components/Selector';
+import { GroupType } from './types';
+import { useGroupsStore } from './store/useGroupsStore';
+import { useTeachersStore } from './store/useTeacherStore';
 
 export const RetroGenerator = () => {
   const [groupType, setGroupType] = createSignal<GroupType>('online');
-  const [teachers] = createResource(groupType, teachersQuery,  { initialValue: [] });
-  const [groups, {refetch}] = createResource(groupType, groupsQuery, { initialValue: [] });
+  const groupStore = useGroupsStore();
+  const teacherStore = useTeachersStore();
   const [teacherCheck, setTeacherCheck] = createSignal<[string, boolean][]>([]);
   const [groupCheck, setGroupCheck] = createSignal<[string, boolean][]>([]);
 
   createEffect(() => {
-    setTeacherCheck(() => teachers().map((teacher) => [teacher, true]) ?? []);
+    groupStore.fetch(() => groupsQuery(groupType()));
+    teacherStore.fetch(() => teachersQuery(groupType()));
   });
 
   createEffect(() => {
-    setGroupCheck(() => groups().map(({ name }) => [name, true]) ?? []);
+    setTeacherCheck(() => teacherStore.teachers.map((teacher) => [teacher, true]) ?? []);
+  });
+
+  createEffect(() => {
+    setGroupCheck(() => groupStore.groups.map(({ name }) => [name, true]) ?? []);
   });
 
   const onChangeTeacher = (teacherName: string) => {
@@ -38,9 +45,8 @@ export const RetroGenerator = () => {
   };
 
   const onGroupTypeChange = (value: string) => {
-    setGroupType(value as GroupType)
-    refetch();
-  }
+    setGroupType(value as GroupType);
+  };
 
   return (
     <div class="flex flex-col items-center m-auto w-3/4 my-5">
@@ -56,7 +62,7 @@ export const RetroGenerator = () => {
         groups={groupCheck()
           .filter(([, checked]) => checked)
           .map(([name]) => name)
-          .map((name) => groups()?.find((group) => group.name === name)!)}
+          .map((name) => groupStore.groups.find((group) => group.name === name)!)}
         teachers={teacherCheck()
           .filter(([, checked]) => checked)
           .map(([name]) => name)}
